@@ -1,0 +1,102 @@
+
+.home{
+    width: 100%;
+  height: 100%;
+  position: relative;
+
+  .index {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background: #fff url('../../assets/h5/bg-index.jpg') 50% / contain no-repeat;
+    text-align: center;
+
+    .title {
+      padding-top: 50px;
+      font-size: 32px;
+      font-weight: 700;
+    }
+
+    .subtitle {
+      font-size: 20px;
+      letter-spacing: 12px;
+      text-indent: 16px;
+      margin-top: 18px;
+    }
+
+    .btn-enter {
+      width: 90%;
+      position: absolute;
+      bottom: 35px;
+      left: 0;
+      right: 0;
+      margin: 0 auto;
+      font-size: 14px;
+      font-weight: 400;
+    }
+
+    .fee-container {
+      width: 90%;
+      position: absolute;
+      left: 0;
+      right: 0;
+      margin: 0 auto;
+      top: 180px;
+
+      &>p {
+        margin-bottom: 8px;
+      }
+
+      .inpt-box {
+        width: 100%;
+        height: 50px;
+        margin-bottom: 14px;
+
+
+        div {
+          display: inline-block;
+          width: 41px;
+          height: 100%;
+          border: 1px solid #aaa;
+          text-align: center;
+          line-height: 50px;
+          color: #000;
+          font-size: 19px;
+          background: #fff;
+        }
+
+        & div:nth-child(2) {
+          border-left: none;
+        }
+
+        & div:nth-child(3) {
+          border: none;
+          width: 28px;
+        }
+
+        & div:nth-child(9) {
+          border: 1px dashed #aaa;
+        }
+      }
+    }
+  }
+
+  .keyboard {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+}
+
+:global(.am-action-sheet-share-cancel-button) {
+  display: none;
+}
+
+:global(.am-action-sheet-message) {
+  text-align: right;
+  margin-right: 10px;
+  font-size: 18px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
