@@ -6,23 +6,25 @@ const defaultPlate = ['云', '', '', '', '', '', '', ''];
 
 export default function CarPlateInput(props) {
   const { onClick, current, carPlate = defaultPlate } = props;
-  if (carPlate.length === 8) carPlate.splice(2, 0, '●');
   const index = parseInt(current, 10);
 
   const getStyle = idx => {
-    if (index === 2) {
-      return { border: null };
-    }
     if (idx === index) {
-      return { border: '1px solid #fa8231' };
+      return { border: '2px solid #fa8231' };
     }
     return { border: null };
   };
-
+  console.log('~~~~~CarPlateInput~~~~', current, `[${carPlate[7]}]`);
   return (
     <div className={styles['inpt-box']}>
       {carPlate.map((val, idx) => (
-        <div key={`${idx}_${Date.now()}`} data-index={idx > 1 ? (idx-1): idx} onClick={onClick} style={getStyle(idx)}>
+        <div 
+          key={`${idx}_${Date.now()}`} 
+          data-index={idx} 
+          onClick={onClick} 
+          style={getStyle(idx)} 
+          className={(idx === 7 && carPlate[7] === '') ? styles['new-item'] : styles['new-item-actived']}
+        >
           {val || '　'}
         </div>
       ))}

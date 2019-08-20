@@ -1,4 +1,4 @@
-import { Button } from 'antd-mobile';
+import { Button, Toast } from 'antd-mobile';
 import React from 'react';
 import router from 'umi/router';
 
@@ -10,42 +10,65 @@ const styles = require('./index.less');
 export default class extends React.Component<{}, {}, any> {
   state = {
     keyboardVisible: false,
-    current: 0,
+    current:'',
     boardFace: false,
     carPlate: ['云', 'A', '', '', '', '', '', '']
   };
 
   handlePlateClick = e => {
-    console.log('~~click:', e.target.innerText);
-    console.log('~~index:', e.target.dataset.index);
-    const inptIndex = e.target.dataset.index;
+    const inptIndex = parseFloat(e.target.dataset.index);
     const { keyboardVisible } = this.state;
     if (!keyboardVisible) { 
-      if (inptIndex === '0') {
+      if (inptIndex === 0) {
         this.handleBoardToggle(true);
       } else {
         this.handleBoardToggle();
       }
      } else {
-       if (inptIndex === '0') {
+       if (inptIndex === 0) {
          this.setState({ boardFace: true });
        } else {
         this.setState({ boardFace: false });
        }
      }
-    this.setState({ current: e.target.dataset.index });
+    this.setState({ current: inptIndex });
     
   };
 
   handleKeyClick = e => {
     const text = e.target.innerText;
+    const carPlate = this.state.carPlate.slice();
+    const current = parseFloat(this.state.current);
+    
     if (text === 'ABC' || text === '返回') {
       return this.setState({ boardFace: !this.state.boardFace })
+    } else if (current > 0 && this.state.boardFace === true) {
+      Toast.fail('车牌号格式错误', 1.2);
+      return;
+    } else if (text === 'backspace') {
+      if (current === 1) {
+        this.setState({ boardFace: true })
+      }
+      if (current < 1) {
+        carPlate.splice(current, 1, '');
+        this.setState({ carPlate });
+      } else {
+        carPlate.splice(current, 1, '');
+        this.setState({ carPlate, current: current - 1 });
+      }
     } else {
-      const carPlate = this.state.carPlate.slice();
-      carPlate.splice(this.state.current, 1, text);
-      console.log('~~~~new carPlate', carPlate);
-      this.setState({ carPlate })
+      carPlate.splice(current, 1, text);
+      if (current >= 7) {
+        this.setState({ carPlate, keyboardVisible: false });
+      } else {
+        if (current + 1 === 1) {
+          this.setState({ boardFace: false })
+        }
+        if (current + 1 === 7) {
+          this.setState({keyboardVisible: false}); 
+        }
+        this.setState({ carPlate, current: current + 1 });
+      }
     }
   }
 
