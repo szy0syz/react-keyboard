@@ -4,9 +4,11 @@
 [![Build With antd-mobile](https://img.shields.io/badge/build-antd--mobile-green.svg)](https://mobile.ant.design)
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)]()
 
+> H5端停缴缴费键盘和车牌显示
+
 该项目主要以 [UMI](https://umijs.org/zh/) + [DVA](https://dvajs.com/) 为底层框架，以[Ant Design Mobile](https://mobile.ant.design/)为 UI 组件库，包含完整的前端工程化实践。
 
-部分代码及功能参考于 [Ant Design pro](https://pro.ant.design/)
+![2019](/preview.gif)
 
 ## 目录结构
 
