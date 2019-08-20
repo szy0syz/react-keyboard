@@ -14,7 +14,7 @@ export default class extends React.Component<{}, {}, any> {
   };
 
   handleOnClick = e => {
-    Toast.info(e.target.innerText, 1);
+    console.log('~~click:', e.target.innerText);
     this.setState({ current: e.target.dataset.index });
   };
 
