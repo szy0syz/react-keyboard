@@ -1,4 +1,4 @@
-import { Button, Toast } from 'antd-mobile';
+import { Button } from 'antd-mobile';
 import React from 'react';
 import router from 'umi/router';
 
@@ -9,17 +9,52 @@ const styles = require('./index.less');
 
 export default class extends React.Component<{}, {}, any> {
   state = {
-    // keyboardVisible: false,
+    keyboardVisible: false,
     current: 0,
+    boardFace: false,
+    carPlate: ['云', 'A', '', '', '', '', '', '']
   };
 
-  handleOnClick = e => {
+  handlePlateClick = e => {
     console.log('~~click:', e.target.innerText);
+    console.log('~~index:', e.target.dataset.index);
+    const inptIndex = e.target.dataset.index;
+    const { keyboardVisible } = this.state;
+    if (!keyboardVisible) { 
+      if (inptIndex === '0') {
+        this.handleBoardToggle(true);
+      } else {
+        this.handleBoardToggle();
+      }
+     } else {
+       if (inptIndex === '0') {
+         this.setState({ boardFace: true });
+       } else {
+        this.setState({ boardFace: false });
+       }
+     }
     this.setState({ current: e.target.dataset.index });
+    
   };
+
+  handleKeyClick = e => {
+    const text = e.target.innerText;
+    if (text === 'ABC' || text === '返回') {
+      return this.setState({ boardFace: !this.state.boardFace })
+    } else {
+      const carPlate = this.state.carPlate.slice();
+      carPlate.splice(this.state.current, 1, text);
+      console.log('~~~~new carPlate', carPlate);
+      this.setState({ carPlate })
+    }
+  }
+
+  handleBoardToggle = (boardFace = false) => {
+    this.setState({ keyboardVisible: !this.state.keyboardVisible, boardFace })
+  }
 
   render = () => {
-    const { current } = this.state;
+    const { current, carPlate, boardFace, keyboardVisible } = this.state;
     return (
       <div className={styles.home}>
         <div className={styles.index}>
@@ -27,7 +62,7 @@ export default class extends React.Component<{}, {}, any> {
           <div className={styles.subtitle}>停车收费系统</div>
           <div className={styles['fee-container']}>
             <p>请输入您的车牌号</p>
-            <CarPlateInput current={current} onClick={this.handleOnClick} />
+            <CarPlateInput current={current} onClick={this.handlePlateClick} carPlate={carPlate} />
             <Button type="primary">查询停车费</Button>
           </div>
           <Button
@@ -40,7 +75,7 @@ export default class extends React.Component<{}, {}, any> {
             进入
           </Button>
         </div>
-        <Keyboard />
+        <Keyboard handleKeyClick={this.handleKeyClick} isFront={boardFace} isShow={keyboardVisible} handleOnCancel={this.handleBoardToggle} />
       </div>
     );
   };

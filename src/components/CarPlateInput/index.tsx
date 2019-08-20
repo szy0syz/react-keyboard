@@ -22,7 +22,7 @@ export default function CarPlateInput(props) {
   return (
     <div className={styles['inpt-box']}>
       {carPlate.map((val, idx) => (
-        <div key={`${idx}_${Date.now()}`} data-index={idx} onClick={onClick} style={getStyle(idx)}>
+        <div key={`${idx}_${Date.now()}`} data-index={idx > 1 ? (idx-1): idx} onClick={onClick} style={getStyle(idx)}>
           {val || '　'}
         </div>
       ))}
