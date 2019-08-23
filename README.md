@@ -6,6 +6,8 @@
 
 > H5端停缴缴费键盘和车牌显示
 
+> 后期点会单独保留h5键盘，然后demo做完成业务还原，最后会抽一份到我的umi区块里。
+
 该项目主要以 [UMI](https://umijs.org/zh/) + [DVA](https://dvajs.com/) 为底层框架，以[Ant Design Mobile](https://mobile.ant.design/)为 UI 组件库，包含完整的前端工程化实践。
 
 ![2019](/preview.gif)
